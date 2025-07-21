@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucas De Koky</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .soundboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .btn {
+      padding: 20px;
+      background: #09f;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #06c;
+    }
+
+    .volume-control {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎵 Lucas De Koky 🎵</h1>
+
+  <div class="soundboard">
+    <button class="btn" onclick="playSound('curakadohuby')">curakadohuby</button>
+    <button class="btn" onclick="playSound('zapadnemesic')">zapadnemesic</button>
+    <button class="btn" onclick="playSound('jebemsetu')">jebemsetu</button>
+    <button class="btn" onclick="playSound('vymrdanec')">vymrdanec</button>
+    <button class="btn" onclick="playSound('typhyycoo')">typhyycoo</button>
+    <button class="btn" onclick="playSound('mrdamvas')">mrdamvas</button>
+    <button class="btn" onclick="playSound('typhyycoo2')">typhyycoo2</button>
+    <button class="btn" onclick="playSound('momentyvymrdane')">momentyvymrdane</button>
+    <button class="btn" onclick="playSound('potitkrev')">potitkrev</button>
+    <button class="btn" onclick="playSound('bida')">bida</button>
+	<button class="btn" onclick="playSound('mrdat')">mrdat</button>
+	<button class="btn" onclick="playSound('kdochcevic')">kdochcevic</button>
+	<button class="btn" onclick="playSound('dohuby')">dohuby</button>
+	<button class="btn" onclick="playSound('proooc')">proooc</button>
+  </div>
+
+  <div class="volume-control">
+    <label for="volume">Hlasitost:</label>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+  </div>
+
+  <script>
+    const sounds = {
+      curakadohuby: new Audio('sounds/curakadohuby.mp3'),
+      zapadnemesic: new Audio('sounds/zapadnemesic.mp3'),
+      jebemsetu: new Audio('sounds/jebemsetu.mp3'),
+      vymrdanec: new Audio('sounds/vymrdanec.mp3'),
+      typhyycoo: new Audio('sounds/typhyycoo.mp3'),
+      mrdamvas: new Audio('sounds/mrdamvas.mp3'),
+	  typhyycoo2: new Audio('sounds/typhyycoo2.mp3'),
+	  momentyvymrdane: new Audio('sounds/momentyvymrdane.mp3'),
+	  potitkrev: new Audio('sounds/potitkrev.mp3'),
+	  bida: new Audio('sounds/bida.mp3'),
+	  mrdat: new Audio('sounds/mrdat.mp3'),
+	  kdochcevic: new Audio('sounds/kdochcevic.mp3'),
+	  dohuby: new Audio('sounds/dohuby.mp3'),
+	  proooc: new Audio('sounds/proooc.mp3'),
+    };
+
+    const volumeSlider = document.getElementById('volume');
+
+    function playSound(name) {
+      const sound = sounds[name];
+      if (sound) {
+        sound.volume = volumeSlider.value;
+        sound.currentTime = 0;
+        sound.play();
+      }
+    }
+
+    // Synchronizace hlasitosti při změně
+    volumeSlider.addEventListener('input', () => {
+      Object.values(sounds).forEach(sound => {
+        sound.volume = volumeSlider.value;
+      });
+    });
+  </script>
+
+</body>
+</html>
